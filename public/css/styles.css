@@ -1,0 +1,16 @@
+html {
+    background-color: black;
+    background-image: url("background.png");
+    background-size: 100% 30%;
+    background-repeat:   no-repeat;
+    padding: 280px 0px;
+  }
+
+.quote{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20%;
+    width: 60%;
+    
+}
