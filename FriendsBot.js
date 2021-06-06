@@ -9,8 +9,9 @@ const express = require('express');
 
 let path = require('path');
 
-var bot = new twit(config)
+let bot = new twit(config)
 const friends = [];
+let port = process.env.PORT || 8000;
 
 const app = express();
 
@@ -67,24 +68,32 @@ function genTweetImage(tweetText){
   });
 }
 
-const startBot = function(){
-  fs.createReadStream('./data/friends_quotes.csv')
-  .pipe(csv())
-  .on('data', (data) => friends.push(data))
-  .on('end', () => {
-    console.log("CSV Imported",friends.length);
-    let rand_no = Math.round(getRandomArbitrary(1,friends.length+1));
-    console.log("Rand",rand_no);
-    let dataUri = genTweetImage(friends[rand_no].quote);
-    //postTweet(friends[rand_no].quote);
-    
+function startBot(isApi){
+  return new Promise( resolve => {
+    fs.createReadStream('./data/friends_quotes.csv')
+    .pipe(csv())
+    .on('data', (data) => friends.push(data))
+    .on('end', () => {
+      console.log("CSV Imported",friends.length);
+      let rand_no = Math.round(getRandomArbitrary(1,friends.length));
+      console.log("Rand",rand_no);
+      if(!isApi){
+        let dataUri = genTweetImage(friends[rand_no].quote);
+      }
+      else{
+        resolve(friends[rand_no]);
+      }
+      //postTweet(friends[rand_no].quote);
+      
+    });
   });
+  
 
 }
 
 //startBot();
-let server = app.listen((process.env.PORT || 9999),()=>{
-  console.log("B1ngChandler is now online");
+let server = app.listen((port),()=>{
+  console.log(`B1ngChandler is now online at http://localhost:${port}`);
   //var setSchedule = schedule.scheduleJob({hour:20,minute:30},startBot);
   const cronJob = new cron.CronJob('0 35 22 * * *',startBot);
   cronJob.start();
@@ -93,6 +102,18 @@ let server = app.listen((process.env.PORT || 9999),()=>{
 app.get('/', (req, res) => { 
   console.log("Serving index file")
   res.sendFile('index.html',{ root: './' });
+});
+
+app.get('/quote', (req, res) => {
+  let isApi = true;
+  let data = startBot(isApi);
+  data.then((dat) => {
+    let sendData = {};
+    sendData.quote = dat.quote;
+    console.log('Data to api endpoint :', dat.quote);
+    res.send(sendData);
+  });
+
 });
 
   
