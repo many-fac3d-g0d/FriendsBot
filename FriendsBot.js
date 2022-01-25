@@ -116,4 +116,6 @@ app.get('/quote', (req, res) => {
 
 });
 
-  
+module.exports = {
+  startBot
+}
