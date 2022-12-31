@@ -2,7 +2,7 @@ name: FriendsBot Twitter
 
 on:
   schedule:
-    - cron: "55 23 * * *"
+    - cron: "30 20 * * *"
   workflow_dispatch:
 
 jobs:
@@ -15,6 +15,7 @@ jobs:
         with:
           node-version: 14.x
       - run: npm install
+      - name: Post Tweet
       - run: |
           touch .env
           echo "CONSUMER_KEY=${{ secrets.CONSUMER_KEY }}" >> .env

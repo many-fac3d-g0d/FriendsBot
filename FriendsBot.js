@@ -20,10 +20,10 @@ function getRandomArbitrary(min, max) {
 
 function postTweet(data){
     data = data.substring(22,);
-    console.log(data);
+    //console.log(data);
     bot.post('media/upload', { media_data: data } , function (err, data, response) {
       let mediaIdStr = data.media_id_string;
-      console.log(mediaIdStr);
+      //console.log(mediaIdStr);
       if(response){
         console.log("Response Code:",response.statusCode);
       }else{
@@ -31,7 +31,7 @@ function postTweet(data){
       }
       var params = { status: '#Friends #friendstvshow', media_ids: [mediaIdStr] };
       bot.post('statuses/update', params, function (err, data, response) {
-        console.log(data);
+        //console.log(data);
         if(response){
           console.log("Response Code:",response.statusCode);
         }else{
@@ -65,9 +65,9 @@ function startBot(){
     .pipe(csv())
     .on('data', (data) => friends.push(data))
     .on('end', () => {
-      console.log("CSV Imported",friends.length);
+      console.log("CSV Records Imported: ",friends.length);
       let rand_no = Math.round(getRandomArbitrary(1,friends.length));
-      console.log("Rand",rand_no);
+      console.log("Quote No: ",rand_no);
       
       genTweetImage(friends[rand_no].quote);
     });
