@@ -16,7 +16,7 @@ jobs:
           node-version: 14.x
       - run: npm install
       - name: Post Tweet
-      - run: |
+        run: |
           touch .env
           echo "CONSUMER_KEY=${{ secrets.CONSUMER_KEY }}" >> .env
           echo "CONSUMER_SECRET=${{ secrets.CONSUMER_SECRET }}" >> .env
