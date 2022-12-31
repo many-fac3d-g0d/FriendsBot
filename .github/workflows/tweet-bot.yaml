@@ -2,24 +2,24 @@ name: FriendsBot Twitter
 
 on:
   schedule:
-    - cron: "55 23 * * *"
+    - cron: "30 20 * * *"
   workflow_dispatch:
 
 jobs:
   tweet-quote:
     runs-on: ubuntu-latest
     steps:
-      - name: create env file
-        run: |
-          touch .env
-          echo "CONSUMER_KEY=${{ secrets.CONSUMER_KEY }}" >> .env
-          echo "CONSUMER_SECRET=${{ secrets.CONSUMER_SECRET }}" >> .env
-          echo "ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }}" >> .env
-          echo "ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }}" >> .env
       - uses: actions/checkout@v3
       - name: Use Node.js 14.x
         uses: actions/setup-node@v3
         with:
           node-version: 14.x
       - run: npm install
-      - run: npm start
+      - name: Post Tweet
+      - run: |
+          touch .env
+          echo "CONSUMER_KEY=${{ secrets.CONSUMER_KEY }}" >> .env
+          echo "CONSUMER_SECRET=${{ secrets.CONSUMER_SECRET }}" >> .env
+          echo "ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }}" >> .env
+          echo "ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }}" >> .env 
+          npm start
