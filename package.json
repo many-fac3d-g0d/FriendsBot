@@ -13,7 +13,8 @@
     "csv-parser": "^3.0.0",
     "dotenv": "^16.0.3",
     "text-to-image": "^2.4.4",
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "twitter-api-v2": "^1.16.1"
   },
   "devDependencies": {
     "chai": "^4.3.4",
