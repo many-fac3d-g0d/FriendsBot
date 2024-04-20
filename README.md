@@ -33,8 +33,3 @@ Access the bot's API endpoint to generate a random quote in JSON
 >{"quote":"Chandler: So, is he house trained or is he going to leave little bathroom tiles all over the place?\n\n"}
 ```
 
-## Current State
-
-Twitter has paywalled its API hence the free version of both twitter API v1.1 & v2.0 are no longer available.
-More details at https://twitter.com/XDevelopers/status/1621026986784337922
-Hence the repo is archived and will no longer be updated, RIP [FriendsBot](https://www.twitter.com/B1ngChandler) 💔
