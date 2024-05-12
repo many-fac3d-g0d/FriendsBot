@@ -2,7 +2,7 @@
 
 A simple nodejs bot using twitter API v1.1 & github actions that tweets random F.R.I.E.N.D.S quotes daily
 
-![B1ngChandler](https://pbs.twimg.com/profile_images/1349769390128988161/frXJP7k4_400x400.jpg)
+[![B1ngChandler](https://pbs.twimg.com/profile_images/1349769390128988161/frXJP7k4_400x400.jpg)](https://twitter.com/B1ngChandler)
 
 ![tweet_image](https://pbs.twimg.com/media/GNKhEx2XMAAR0l-?format=png&name=small)
 <div>
